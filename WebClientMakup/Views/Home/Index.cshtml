@@ -1,0 +1,606 @@
+﻿@using WebClientMakup.Model
+
+@model ProFileSupplier
+@{
+ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link rel="stylesheet" href="~/lib/bootstrap/bootstrap-icons/bootstrap-icons.css" />
+
+</head>
+
+<body>
+    @if (Model != null){
+
+    <h2>@Model.SupplierName</h2>
+    <div class="container-fluid px-0" style="margin-top: 20px;">
+        <div class="row full-width-row">
+
+            <div class="col-7" >
+                <form asp-action="Index" asp-controller="Home" enctype="multipart/form-data" asp-route-supplierName="@Model.SupplierName">
+                    <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile04"
+                        aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="file" onchange="readFile(this)">
+                    <button class="btn btn-outline-secondary" type="sumbit" value=Upload>Загрузить</button>
+                </div>
+                </form>
+
+                
+
+
+                <div class="form-floating" style="margin-top:5px">
+                    <textarea class="form-control" disabled="true" placeholder="Leave a comment here"
+                        id="floatingTextarea2" style="height: 100%;">@ViewBag.Res</textarea>
+                    <label for="floatingTextarea2">"Import File"</label>
+                </div>
+
+            </div>
+
+            <div class="col-5">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Основное
+                            </button>
+                        </h2>
+
+                        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                                @if (Model.XMLSupplierConf != null)
+                                {
+                                     <div class="accordion-body">
+
+
+                                <div class="container">
+                                    <div class="row">
+
+
+                                        Основной каталог<br />
+                                        <input type="text" class="form-control" style="width: 100%;" value="@Model.XMLSupplierConf.Input"/>
+                                    </div>
+                                </div>
+
+
+                                <div class="container" style="margin-top:5px">
+                                    <div class="row">
+
+                                        Артикул <br />
+                                        <input type="text" class="form-control" style="width: 100%;">
+                                    </div>
+                                </div>
+
+
+                                <div class="container" style="margin-top:5px">
+                                    <div class="row">
+                                        Название<br />
+                                        <input type="text" class="form-control" style="width: 100%;" value="@Model.XMLSupplierConf.Title">
+                                    </div>
+                                </div>
+
+                                <div class="container" style="margin-top:5px;">
+                                    <div class="row">
+                                        Полное название<br />
+                                        <input type="text" class="form-control" style="width: 100%;" value="@Model.XMLSupplierConf.TitleLong">
+                                    </div>
+                                </div>
+
+                                <div class="container" style="margin-top:5px;">
+                                    <div class="row">
+                                        Описание<br />
+                                        <input type="text" class="form-control" style="width: 100%;" value="@Model.XMLSupplierConf.Description">
+                                    </div>
+                                </div>
+
+                                <div class="container" style="margin-top:5px;">
+                                    <div class="row">
+                                        Вендор<br />
+                                        <input type="text" class="form-control" style="width: 100%;" value="@Model.XMLSupplierConf.Vendor">
+                                    </div>
+                                </div>
+
+                            </div>
+                                }
+                               
+                        </div>
+                    </div>
+
+                    <!--Аттрибуты-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Аттрибуты
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="row" style="margin-left: 5px; margin-right:5px">
+                                    Каталог аттрибута<br />
+                                    <input type="text" class="form-control" style="width: 100%;">
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-6">Поставщик</th>
+                                            <th class="col-8">База</th>
+                                            <th class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+                                            </td>
+                                            <td>
+
+                                                <input class="form-control" list="datalistAttr" />
+
+                                                <datalist id="datalistAttr">
+@*                                                    @foreach (var item in Model)
+                                                    {
+                                                    <option value="@item.Title"></option>    
+                                                    }*@
+                                                    
+                                                    <option value="material">Материал</option>
+                                                </datalist>
+
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+
+                                                <input class="form-control" list="datalistAttr" />
+
+                                                <datalist id="datalistAttr">
+                                                    <option value="color">Цвет</option>
+                                                    <option value="material">Материал</option>
+                                                </datalist>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+
+                                                <input class="form-controlAttr" list="datalistAttr" />
+
+                                                <datalist id="datalist">
+                                                    <option value="color">Цвет</option>
+                                                    <option value="material">Материал</option>
+                                                </datalist>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-success" style="width: 45px;">+</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Аттрибуты END-->
+
+                    <!--Упаковка-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Упаковка
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="row" style="margin-left: 5px; margin-right:5px">
+                                    Каталог упаковки<br />
+                                    <input type="text" class="form-control" style="width: 100%;">
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-6">Поставщик</th>
+                                            <th class="col-8">База</th>
+                                            <th class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistPack" />
+
+                                                <datalist id="datalistPack">
+                                                    <option value="height">Высота</option>
+                                                    <option value="weight">Вес</option>
+                                                </datalist>
+
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistPack" />
+                                                <datalist id="datalistPack">
+                                                    <option value="height">Высота</option>
+                                                    <option value="weight">Вес</option>
+                                                </datalist>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref"></select>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-success" style="width: 45px;">+</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Упаковка END-->
+
+
+                    <!--Документы-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Документы
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="row" style="margin-left: 5px; margin-right:5px">
+                                    Каталог документов<br />
+                                    <input type="text" class="form-control" style="width: 100%;">
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-6">Поставщик</th>
+                                            <th class="col-8">База</th>
+                                            <th class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistDoc" />
+                                                <datalist id="datalistDoc">
+                                                    <option value="type">Тип</option>
+                                                    <option value="link">Ссылка</option>
+                                                </datalist>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistDoc" />
+                                                <datalist id="datalistDoc">
+                                                    <option value="type">Тип</option>
+                                                    <option value="link">Ссылка</option>
+                                                </datalist>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref"></select>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-success" style="width: 45px;">+</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Документы END-->
+
+                    <!--Особенности-->
+                    <div class="accordion-item">
+                       <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Особенности
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="row" style="margin-left: 5px; margin-right:5px">
+                                    Каталог особенностей<br />
+                                    <input type="text" class="form-control" style="width: 100%;">
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-6">Поставщик</th>
+                                            <th class="col-8">База</th>
+                                            <th class="col-4"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref">
+                                                    <option selected>Выберите...</option>
+                                                    <option value="1">type</option>
+                                                    <option value="2">link</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref">
+                                                    <option selected>Выберите...</option>
+                                                    <option value="1">link</option>
+                                                    <option value="2">type</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref"></select>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-success" style="width: 45px;">+</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Особенности END-->
+
+                    <!--Словарь-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                Словарь
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="row" style="margin-left: 5px; margin-right:5px">
+                                    Каталог документов<br />
+                                    <input type="text" class="form-control" style="width: 100%;">
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-3">Поставщик</th>
+                                            <th class="col-3">База</th>
+                                            <th class="col-3"></th>
+                                            <th class="col-1"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistDoc" />
+                                                <datalist id="datalistDoc">
+                                                    <option value="type">Тип</option>
+                                                    <option value="link">Ссылка</option>
+                                                </datalist>
+
+                                            </td>
+
+                                            <td>
+                                                <input class="form-control" list="datalistDoc" />
+                                                <datalist id="datalistDoc">
+                                                    <option value="type">Тип</option>
+                                                    <option value="link">Ссылка</option>
+                                                </datalist>
+                                            </td>
+
+                                            <td style="vertical-align: middle;">
+                                                <button class="btn btn-danger" style="width: 100%; height: 100%">X</button>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <input class="form-control" list="datalistDoc" />
+                                                <datalist id="datalistDoc">
+                                                    <option value="type">Тип</option>
+                                                    <option value="link">Ссылка</option>
+                                                </datalist>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger" style="width: 45px;">X</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Введите..."
+                                                    aria-describedby="inputGroup-sizing-default" />
+
+                                            </td>
+                                            <td>
+                                                <select class="form-select" id="inlineFormSelectPref"></select>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-success" style="width: 45px;">+</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Словарь END-->
+
+
+                </div>
+
+
+
+@*                <a class="btn-primary btn-lg" style="margin-top:20px; align-self:center" asp-controller="Home" asp-action="UploadToBase" asp-route-supplierName="@Model.SupplierName" asp-route-file="@ViewBag.File">Сохранить</a>
+*@
+            </div>
+        </div>
+    </div>
+
+    }
+
+@section scripts{
+
+<script type="text/javascript"> 
+function readFile(input) {
+ let file = input.files[0];
+
+ let reader = new FileReader();
+
+ reader.readAsText(file);
+
+ //var array = reader.result.toString().split("\n");
+
+
+ //for(i in array){
+
+ //    console.log(array[i].toString());
+ //}
+
+ reader.onload = function() {
+     var array = reader.result.toString().split("\n");
+     let resultStringText = "";
+     for(let i = 0; i<=15000;i++){
+         resultStringText = resultStringText + array[i] + "\n";
+     }
+
+     document.getElementById('floatingTextarea2').innerHTML = resultStringText;
+   console.log(reader.result);
+    
+ };
+}
+
+</script>
+}
+
+  
+
+</body>

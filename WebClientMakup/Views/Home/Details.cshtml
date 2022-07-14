@@ -1,0 +1,255 @@
+﻿@model WebClientMakup.Model.Product
+@{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+<div class="modal fade bd-example-modal-lg"   id="add-contact" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+         <div class="modal-header">
+                <h5 class="modal-title" id="addContactLabel"> @Model.Title</h5>
+            </div>
+           <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4  fw-bold" > Артикул </div>
+                                        <div class="col-4"> @Model.InternalCode  </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 fw-bold"> Название </div>
+                                        <div class="col"> @Model.Title  </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 fw-bold"> Полное название </div>
+                                        <div class="col"> @Model.TitleLong  </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row"> 
+                                        <div class="col-4 fw-bold"> Описание </div>
+                                        <div class="col">
+                                            <textarea class="form-control" disabled="true"
+                                                id="floatingTextarea2"
+                                                style="height: 100%; max-height: 100px;"> @Model.Description </textarea>
+                                        </div>
+                                    </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 fw-bold"> Вендор </div>
+                                        <div class="col"> @Model.Vendor  </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+
+                                         <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="false" aria-controls="collapseOne">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col fw-bold"> Документы </div>
+
+                                                </div>
+                                            </div>
+                                        </button>
+
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+
+
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Тип</th>
+                                                        <th>StartDate</th>
+                                                        <th>EndDate</th>
+                                                        <th>Ссылка</th>
+                                                        <th>Удалён</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    
+                                                    <tr>
+                                                        <td>Каталог</td>
+                                                        <td>01.01.2019</td>
+                                                        <td>30.12.2022</td>
+                                                        <td><a class="link-dark" href="https://www.google.com/">Link</a></td>
+                                                        <td>нет</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col fw-bold"> Фото </div>
+
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <img style="width: 120px; height: 120px;" src="https://static.wikia.nocookie.net/minecraft-mojang/images/c/ca/%D0%9E%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D0%B0%D1%8F_%D1%88%D0%B5%D1%80%D1%81%D1%82%D1%8C.png/revision/latest/top-crop/width/360/height/450?cb=20181115123425&path-prefix=ru" class="img-thumbnail" alt="data:image/jpeg;base64,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">
+                                            <img style="width: 120px; height: 120px;" src="https://lardoshop.ru/wp-content/uploads/2019/11/paltovaja-art.25-483-3-cena-3500.jpg" class="img-thumbnail" alt="...">
+                                            <img style="width: 120px; height: 120px;" src="data:image/jpeg;base64,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" class="img-thumbnail" alt="...">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col fw-bold"> Аттрибуты </div>
+
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Название</th>
+                                                        <th>Значение</th>
+                                                        <th>Рейтинг</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <tbody>
+                                                    @foreach (var item in Model.Attributes)
+                                        {
+                                        <tr>
+                                                        <td></td>
+                                                        <td>@item.Value</td>
+                                                        <td>s</td>
+                                                        <td>@item.AttributeEntity</td>
+                                                    </tr>                                            
+                                        }
+
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                            aria-expanded="false" aria-controls="collapseFour">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col fw-bold"> Особенности </div>
+
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+
+                                            <ul class="list-group">
+                                                <li class="list-group-item"> Натуральная шерсть барана </li>
+                                                <li class="list-group-item"> Баран действительно был оранжевый </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 fw-bold"> Добавлен </div>
+                                        <div class="col"> @Model.CreatedAt </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 fw-bold"> Обновлен </div>
+                                        <div class="col"> @Model.UpdatedAt </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                        </ul>
+    </div>
+  </div>
+</div>
+
+
